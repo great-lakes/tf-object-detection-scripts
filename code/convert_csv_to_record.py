@@ -58,11 +58,17 @@ label_map = label_map_util.load_labelmap(RELATIVE_LABELS_PATH)
 categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
 category_index = label_map_util.create_category_index(categories)
 
-list(filter((lambda category: category['name'] == 'person'), categories))[0]['id']
-
 # Filter through .pbtxt to return integer id
 def class_text_to_int(row_label):
-    return list(filter((lambda category: category['name'] == row_label), categories))[0]['id']
+    indexList = list(filter((lambda category: category['name'] == row_label), categories))
+
+    # check if list is empty before indexing
+    if not indexList:
+        sys.exit("Value in csv is not in pbtxt. Ensure labels in csv are correct.")
+
+    index = indexList[0]['id']
+
+    return index
 
 
 def split(df, group):
@@ -136,7 +142,6 @@ def convert_to_record(name):
 def main(_):
     convert_to_record('train')
     convert_to_record('eval')
-
 
 if __name__ == '__main__':
     tf.app.run()

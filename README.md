@@ -49,6 +49,12 @@ ___
 Above shows the file format used as well as where key files used throughout the workflow are located.
 
 ___
+## Prerequisites
+TODO:
+- software required to run scripts
+- upload and reference installation.md
+
+___
 ## Workflow
 ### 1. Extract Frames
 - `/code/extract_frames.py`

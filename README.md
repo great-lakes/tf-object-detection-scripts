@@ -16,7 +16,9 @@ ___
     extract_frames.py
     obj_det_coco.py
     obj_det_custom.py
+    obj_det_custom_track.py
     obj_set_webcam.py
+    tracker.py
   /datasets
     /example_dataset
       /data
@@ -56,11 +58,25 @@ TODO:
 
 ___
 ## Workflow
+This section outlines and talks through the main workflow process of training a TensorFlow Object Detection model using this repository. Each script referenced below can be found in the `/code` directory. Please use the `--help` flag for each Python script to learn more about how to run the scripts. i.e. `python code/{script}.py --help`. Also, each Python script has detailed documentation at the beginning of each file.
+
+> For the remainder of this workflow, path directories assume you are inside `datasets/{dataset_name}/` using the above file structure as an example.
+
 ### 1. Extract Frames
-- `/code/extract_frames.py`
+Depending on what image/video labeling tool you use, you may first have to extract the frames from a video that you wish to use. If you have a directory of images you can skip this step. Utilizing the `extract_frames.py` script requires that your video file is located inside the `/media` directory. 
+
+```
+python code/extract_frames.py --dateset_name=example_dataset --video_file=example.mp4
+```
+
+Running this script will extract the frames as individual `.jpg` files into `/frames/raw`
 
 ### 2. Label
-- We found [labelImg](https://github.com/tzutalin/labelImg) to be efficient.
+This is arguably the most important and tedious step when creating a custom object detection model. We are required to label each frame with the objects of interest to our model. There are many open source tools available that you can use for this process, we found [labelImg](https://github.com/tzutalin/labelImg) to be efficient.
+
+The key output that we require from this step is a directory of `.xml` files which contain information about the frame, labels and coordinates. Most labeling tools will allow you to export these files.
+
+Save exported `.xml` files in `/frames/labeled`
 
 ### 3. Convert .xml to .csv
 - `/code/convert_xml_to_csv.py`

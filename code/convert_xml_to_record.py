@@ -150,9 +150,11 @@ NUM_CLASSES=4
 PATH_TO_LABELS = f'../datasets/{DATASET_NAME}/data/{PBTXT_FILE}'
 RELATIVE_LABELS_PATH = os.path.abspath(os.path.dirname(__file__) + '/' + PATH_TO_LABELS)
 
+num_classes = len(label_map_util.get_label_map_dict(RELATIVE_LABELS_PATH))
+
 # Label maps map indices to category names, so that when our convolution network predicts `5`, we know that this corresponds to `airplane`.  Here we use internal utility functions, but anything that returns a dictionary mapping integers to appropriate string labels would be fine
 label_map = label_map_util.load_labelmap(RELATIVE_LABELS_PATH)
-categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
+categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=num_classes, use_display_name=True)
 category_index = label_map_util.create_category_index(categories)
 
 # Filter through .pbtxt to return integer id

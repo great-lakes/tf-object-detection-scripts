@@ -55,7 +55,14 @@ RELATIVE_LABELS_PATH = os.path.abspath(os.path.dirname(__file__) + '/' + PATH_TO
 
 # Label maps map indices to category names, so that when our convolution network predicts `5`, we know that this corresponds to `airplane`.  Here we use internal utility functions, but anything that returns a dictionary mapping integers to appropriate string labels would be fine
 label_map = label_map_util.load_labelmap(RELATIVE_LABELS_PATH)
-categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
+
+def get_num_classes(label_map_path):
+    label_map_dict = label_map_util.get_label_map_dict(label_map_path)
+    return len(label_map_dict)
+
+num_classes = get_num_classes(RELATIVE_LABELS_PATH)
+
+categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=num_classes, use_display_name=True)
 category_index = label_map_util.create_category_index(categories)
 
 # Filter through .pbtxt to return integer id

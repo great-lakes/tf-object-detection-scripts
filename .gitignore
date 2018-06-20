@@ -2,3 +2,5 @@
 *.mp4
 *.xml
 __pycache__
+datasets/**/*
+datasets/!example_dataset

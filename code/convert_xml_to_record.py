@@ -70,7 +70,7 @@ if not 1 > SPLIT_VALUE > 0.50:
 CONVERT XML TO CSV
 """
 
-def xml_to_csv(path):
+def xml_to_df(path):
     xml_list = []
     for xml_file in glob.glob(path + '/*.xml'):
         tree = ET.parse(xml_file)
@@ -105,7 +105,7 @@ def convert_xml_to_csv():
     SAVE_PATH = f'../datasets/{DATASET_NAME}/data'
     RELATIVE_SAVE_PATH = os.path.abspath(os.path.dirname(__file__) + '/' + SAVE_PATH)
 
-    xml_df = xml_to_csv(RELATIVE_LABELED_PATH)
+    xml_df = xml_to_df(RELATIVE_LABELED_PATH)
 
     # separate labeled frames based on defined train/eval split
 

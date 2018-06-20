@@ -32,7 +32,6 @@ parser = argparse.ArgumentParser(description='Run object detection on video with
 parser.add_argument('--dataset_name', help='name of dataset directory inside of datasets/ which contains the video and data. (required)', required=True)
 parser.add_argument('--video_file', help='name of video inside dataset including the file format. (required)', required=True)
 parser.add_argument('--pbtxt_file', help='name of file which defines label indexes including the file format. located in /dataset/{dataset_name}/data directory. (required)', required=True)
-parser.add_argument('--num_classes', help='number of classes used to train object detection model. (required)', type=int, required=True)
 
 args = parser.parse_args()
 argsdict = vars(args)
@@ -42,7 +41,6 @@ DATASET_NAME = argsdict['dataset_name']
 VIDEO_FILE = argsdict['video_file']
 VIDEO_NAME_ALTERED = VIDEO_FILE.replace('.', '_')
 PBTXT_FILE = argsdict['pbtxt_file']
-NUM_CLASSES = argsdict['num_classes']
 
 # ## Object detection imports
 # Here are the imports from the object detection module.
@@ -78,6 +76,8 @@ RELATIVE_CKPT_PATH = os.path.abspath(os.path.dirname(__file__) + '/' + PATH_TO_C
 # List of the strings that is used to add correct label for each box.
 PATH_TO_LABELS = f'../datasets/{DATASET_NAME}/data/{PBTXT_FILE}'
 RELATIVE_LABELS_PATH = os.path.abspath(os.path.dirname(__file__) + '/' + PATH_TO_LABELS)
+
+NUM_CLASSES = len(label_map_util.get_label_map_dict(RELATIVE_LABELS_PATH))
 
 print("Loading model into memory " + str(datetime.datetime.utcnow()))
 # ## Load a (frozen) Tensorflow model into memory.

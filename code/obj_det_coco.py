@@ -71,7 +71,7 @@ PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'
 LABELS_PATH = '../../models/research/object_detection/data/mscoco_label_map.pbtxt'
 RELATIVE_LABELS_PATH = os.path.abspath(os.path.dirname(__file__) + '/' + LABELS_PATH)
 
-NUM_CLASSES = 90
+NUM_CLASSES = len(label_map_util.get_label_map_dict(RELATIVE_LABELS_PATH))
 
 # ## Download Model
 # Must run first time to download/extract model.

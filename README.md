@@ -160,9 +160,11 @@ Deleting .csv files, please use --keep_csv flag to prevent deletion.
 > Note the .csv files are deleted in the example above, use the `--keep_csv` flag to keep the created `.csv` files inside `[DS]/data/`
 
 ## 5. Download Pretrained Model
-TODO:
 
-Get model from model zoo and put into `pretrained/` directory. we require the `.ckpt` files
+1. Download a pretrained model from Tensorflow's [Model Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md).  
+2. Extract the tar file as a directory under `tf-object-detection-scripts/pretrained/`.
+    * For example, it should looks like `tf-object-detection-scripts/pretrained/ssd_mobilenet_v1_coco_checkpoint/`
+3. In this directory, there should be three files with names starting with `model.ckpt...`
 
 ## 6. Create .config File
 TODO:

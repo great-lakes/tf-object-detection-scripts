@@ -85,7 +85,7 @@ TensorFlow requires labeled data to be converted into `.record` files for traini
 
 Example running script:
 ```
-python code\convert_xml_to_record.py --dataset_name=example_dataset --pbtxt_file=pascal_label_map.pbtxt
+python code/convert_xml_to_record.py --dataset_name=example_dataset --pbtxt_file=pascal_label_map.pbtxt
 ```
 Breaking this conversion into two main steps (already taken care of by the script):
 
@@ -118,29 +118,44 @@ Regardless, the script will use the existing `.csv` files to create TensorFlow's
 Example output from the second step of the script:
 ```
 -----------------------
-Successfully created the TFRecords: [DS]\data\train.record
-Successfully created the TFRecords: [DS]\data\eval.record
+Successfully created the TFRecords: [DS]/data/train.record
+Successfully created the TFRecords: [DS]/data/eval.record
 -----------------------
 Deleting .csv files, please use --keep_csv flag to prevent deletion.
 ```
 
 > Note the .csv files are deleted in the example above, use the `--keep_csv` flag to keep the created `.csv` files inside `[DS]/data/`
 
-## 5. Train
-- `../model/reserach/object_detection/train.py`
+## 5. Download Pretrained Model
+TODO:
 
-## 6. Evaluate
+Get model from model zoo and put into `pretrained/` directory. we require the `.ckpt` files
+
+## 6. Create .config File
+TODO:
+
+create example.config
+
+## 7. Train
+The training script, provided by TensorFlow, will be used to train our custom model.
+
+Example running script:
+```
+python ../model/reserach/object_detection/train.py --logtostderr --train_dir=[DS]/training --pipeline_config_path=[DS]/example.config
+```
+
+## 8. Evaluate
 - `../model/reserach/object_detection/eval.py`
 
-## 7. Export Frozen Model
+## 9. Export Frozen Model
 - `../model/reserach/object_detection/export_inference_graph.py`
 
-## 8. Run Object Detection Using Custom Trained Model
+## 10. Run Object Detection Using Custom Trained Model
 - `/code/obj_det_custom.py`
 
 ___
 ## .gitignore
-Ignoring the following file formats by default to enforce privacy and avoid accidental uploading of sensitive files. Feel free to change this file in root.
+Ignoring the following file formats by default to enforce privacy and avoid accidental uploading of sensitive files. Feel free to change the `.gitignore` which is located in root.
 ```
 *.jpg
 *.png

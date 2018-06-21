@@ -122,7 +122,8 @@ python code/convert_xml_to_record.py --dataset_name=example_dataset --pbtxt_file
 ```
 Breaking this conversion into two main steps (already taken care of by the script):
 
-### Step 1: `xml` -> `csv`
+**Step 1: `xml` -> `csv`**
+
 The `.xml` files containing the frame name, labels and coordinates will be converted into `.csv` files. This is a convenience step for the developer, allowing easy viewing and manipulation, if needed through programs such as Excel. The resulting `.csv` files will be used to create the `.record` files in the next step of this script.
 
 
@@ -140,7 +141,8 @@ ERROR: Value(s) in csv is not in pbtxt. Ensure correct labels are in csv and rer
 ```
 Simply fix the labels inside the `.csv` files and rerun the command.
 
-### Step 2: `csv` -> `record`
+**Step 2: `csv` -> `record`**
+
 At this point, either step 1 has successfully created `.csv` files, or there are detected `.csv` files already inside `[DS]/data/`. If there are any `.csv` file detected, you will see this prompt:
 ```
 .csv files found, skipping .xml to .csv creation.
@@ -166,10 +168,54 @@ Deleting .csv files, please use --keep_csv flag to prevent deletion.
     * For example, it should looks like `tf-object-detection-scripts/pretrained/ssd_mobilenet_v1_coco_checkpoint/`
 3. In this directory, there should be three files with names starting with `model.ckpt...`
 
-## 6. Create .config File
-TODO:
+## 6. Create a `.config` File
+A pipeline configuration file is needed for Tensorflow to know how to train a model.
 
-create example.config
+A pipeline consists of multiple aspects of the training process.  Here are some aspects of the pipeline config file:
+* The model being trained, along with layer configurations
+* Hyperparameters
+* Pretrained checkpoint location for Transfer Learning
+* Paths for important files like `.record` and label `.pbtxt` files.
+
+To create a `.config` file, the best way is to copy one from `models/research/object_detection/samples/configs/`, and pick the model that you want to apply transfer learning on.  Copy the selected config file under `[DS]/data/{model_name}.config`
+
+**Changing the copied `.config` file:**
+* Search for `batch_size` and lower the value to `2`.  If you are using a dedicated VM for deep learning, you can increase this number.  Larger the number, less fluctuation of the loss value.
+* Search for `fine_tune_checkpoint` and set the value to `./models/{dir_from_model_zoo}/model.ckpt`
+* Search for `train_input_reader` and set the value of `tf_train_input_reader -> input_path` to `./datasets/{dataset_name}/data/train.record`.  And set `label_map_path` to `./datasets/{dataset_name}/data/pascal_label_map.pbtxt`
+* Search for `eval_input_reader` and set the value of `tf_train_input_reader -> input_path` to `./datasets/{dataset_name}/data/train.record`.  And set `label_map_path` to `./datasets/{dataset_name}/data/pascal_label_map.pbtxt`
+
+Below is an example of all the values being changed.
+```
+...
+train_config: {
+  batch_size: 2
+  ...
+  fine_tune_checkpoint: "./pretrained/{dir_from_model_zoo}/model.ckpt"
+  from_detection_checkpoint: true
+  ...
+}
+
+...
+
+train_input_reader: {
+  tf_record_input_reader {
+    input_path: "./datasets/{dataset_name}/data/train.record"
+  }
+  label_map_path: "./datasets/{dataset_name}/data/pascal_label_map.pbtxt"
+}
+
+...
+
+eval_input_reader: {
+  tf_record_input_reader {
+    input_path: "./datasets/{dataset_name}/data/eval.record"
+  }
+  label_map_path: "./datasets/{dataset_name}/data/pascal_label_map.pbtxt"
+  shuffle: false
+  num_readers: 1
+}
+```
 
 ## 7. Train
 The training script, provided by TensorFlow, will be used to train our custom model.

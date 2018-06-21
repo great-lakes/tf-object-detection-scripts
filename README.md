@@ -176,16 +176,13 @@ The training script, provided by TensorFlow, will be used to train our custom mo
 
 Example running script:
 ```
-python ../model/reserach/object_detection/train.py --logtostderr --train_dir=[DS]/training --pipeline_config_path=[DS]/example.config
+python ../model/reserach/object_detection/train.py --logtostderr --train_dir=datasets/{dataset_name}/training --pipeline_config_path=datasets/{dataset_name}/data/example.config
 ```
 
-## 8. Evaluate
-- `../model/reserach/object_detection/eval.py`
-
-## 9. Export Frozen Model
+## 8. Export Frozen Model
 - `../model/reserach/object_detection/export_inference_graph.py`
 
-## 10. Run Object Detection Using Custom Trained Model
+## 9. Run Object Detection Using Custom Trained Model
 - `/code/obj_det_custom.py`
 
 ___

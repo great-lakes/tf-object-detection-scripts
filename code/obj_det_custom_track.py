@@ -7,10 +7,10 @@ Arguments:
   [dataset_name]: name of dataset directory inside of datasets/ which contains the video and data. (required)
   [video_file]: name of video inside dataset including the file format. (required)
   [pbtxt_file]: name of file which defines label indexes including the file format. located in /dataset/{dataset_name}/data directory. (required)
-  [num_classes]: number of classes used to train object detection model. (required)
+
 Example Usage:
-  obj_det_video_eval_custom.py [dataset_name] [video_file] [pbtxt_file] [num_classes]
-  obj_det_video_eval_custom.py custom_baseline rolling1.mp4 pascal_label_map.pbtxt 4
+  obj_det_video_eval_custom.py [dataset_name] [video_file] [pbtxt_file]
+  obj_det_video_eval_custom.py custom_baseline rolling1.mp4 pascal_label_map.pbtxt
 """
 
 import os

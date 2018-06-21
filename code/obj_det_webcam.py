@@ -6,6 +6,7 @@ openCV outputs images in a separate windows when running.
 Note, must use file structure as defined in README.md
 Arguments:
   [webcam_index]: Index of webcam to use. Most computer cameras are set up 0=front; 1=back;. (optional, default=0)
+  
 Example Usage:
   obj_det_webcam.py [webcam_index]
   obj_det_webcam.py 1

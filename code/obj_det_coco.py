@@ -6,6 +6,7 @@ Note, must use file structure as defined in README.md
 Arguments:
   [dataset_name]: name of dataset directory inside of datasets/ which contains the video and data. (required)
   [video_file]: name of video inside {dataset_name} including the file format. (required)
+  
 Example Usage:
   obj_det_video_eval_coco.py [dataset_name] [video_file]
   obj_det_video_eval_coco.py custom_baseline rolling_backpack.mp4

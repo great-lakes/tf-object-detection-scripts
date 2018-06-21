@@ -99,6 +99,8 @@ def split(df, chunk_size):
     return np.split(df, indices)
 
 def convert_xml_to_csv():
+    print('Generating .csv files for .record creation...')
+
     LABELED_PATH = f'../datasets/{DATASET_NAME}/frames/labeled'
     RELATIVE_LABELED_PATH = os.path.abspath(os.path.dirname(__file__) + '/' + LABELED_PATH)
 
@@ -257,6 +259,9 @@ def remove_csv():
     PATH_TO_COMBINED = f'../datasets/{DATASET_NAME}/data/combined_labels.csv'
     remove_file(os.path.abspath(os.path.dirname(__file__) + '/' + PATH_TO_COMBINED))
 
+    print('-----------------------')
+    print('Deleting .csv files, please use --keep_csv flag to prevent deletion.')
+
 """
 MAIN FUNCTION
 """
@@ -274,7 +279,10 @@ def csv_exists():
     return (eval_exists) and (train_exists)
 
 def main():
-    if not csv_exists():
+    if csv_exists():
+        print('.csv files found, skipping .xml to .csv creation.')
+        print('-----------------------')
+    else:
         convert_xml_to_csv()
     convert_csv_to_record()
     remove_csv()

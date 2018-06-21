@@ -6,6 +6,7 @@ Note, must use file structure as defined in README.md
 Arguments:
   [dataset_name]: name of dataset directory inside of datasets/ which contains the video and data. (required)
   [video_file]: name of video inside {dataset_name} including the file format. (required)
+  
 Example Usage:
   obj_det_video_eval_coco.py [dataset_name] [video_file]
   obj_det_video_eval_coco.py custom_baseline rolling_backpack.mp4
@@ -71,7 +72,7 @@ PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'
 LABELS_PATH = '../../models/research/object_detection/data/mscoco_label_map.pbtxt'
 RELATIVE_LABELS_PATH = os.path.abspath(os.path.dirname(__file__) + '/' + LABELS_PATH)
 
-NUM_CLASSES = 90
+NUM_CLASSES = len(label_map_util.get_label_map_dict(RELATIVE_LABELS_PATH))
 
 # ## Download Model
 # Must run first time to download/extract model.

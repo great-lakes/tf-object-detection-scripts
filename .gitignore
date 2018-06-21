@@ -2,3 +2,6 @@
 *.mp4
 *.xml
 __pycache__
+datasets/**/*
+datasets/!example_dataset
+ssd_mobilenet_v1_coco_11_06_2017*

@@ -6,6 +6,7 @@ openCV outputs images in a separate windows when running.
 Note, must use file structure as defined in README.md
 Arguments:
   [webcam_index]: Index of webcam to use. Most computer cameras are set up 0=front; 1=back;. (optional, default=0)
+  
 Example Usage:
   obj_det_webcam.py [webcam_index]
   obj_det_webcam.py 1
@@ -70,7 +71,7 @@ PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'
 LABELS_PATH = '../../models/research/object_detection/data/mscoco_label_map.pbtxt'
 RELATIVE_LABELS_PATH = os.path.abspath(os.path.dirname(__file__) + '/' + LABELS_PATH)
 
-NUM_CLASSES = 90
+NUM_CLASSES = len(label_map_util.get_label_map_dict(RELATIVE_LABELS_PATH))
 
 # ## Download Model
 # Must run first time to download/extract model.

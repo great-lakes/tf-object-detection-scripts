@@ -78,7 +78,9 @@ The key output that we require from this step is a directory of `.xml` files whi
 
 Save exported `.xml` files in `[DS]/frames/labeled/`
 
-## 3. Convert .xml to .record
+## 3. Create .pbtxt file
+
+## 4. Convert .xml to .record
 TensorFlow requires labeled data to be converted into `.record` files for training. We have provided a script that converts `.xml` files into `.csv`, and ultimately `.record` files.
 
 Example running script:
@@ -124,16 +126,16 @@ Deleting .csv files, please use --keep_csv flag to prevent deletion.
 
 > Note the .csv files are deleted in the example above, use the `--keep_csv` flag to keep the created `.csv` files inside `[DS]/data/`
 
-## 4. Train
+## 5. Train
 - `../model/reserach/object_detection/train.py`
 
-## 5. Evaluate
+## 6. Evaluate
 - `../model/reserach/object_detection/eval.py`
 
-## 6. Export Frozen Model
+## 7. Export Frozen Model
 - `../model/reserach/object_detection/export_inference_graph.py`
 
-## 7. Run Object Detection Using Custom Trained Model
+## 8. Run Object Detection Using Custom Trained Model
 - `/code/obj_det_custom.py`
 
 ___

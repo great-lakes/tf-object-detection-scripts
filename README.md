@@ -52,12 +52,17 @@ Above shows the file format used as well as where the files are used.
 
 ___
 ## Prerequisites
-You will need tensorflow and python 3.6 to run the scripts in this repo
-- upload and reference [INSTALL.md](INSTALL.md)
+You will need tensorflow and python 3.6 to run the scripts in this repo.
+
+Please refer to the [INSTALL.md](INSTALL.md) documentation for details on how to install all the dependencies.
 
 ___
 # Workflow
-This section outlines and talks through the main workflow process of training a TensorFlow Object Detection model using this repository. Each script referenced below can be found in the `code/` directory. Please use the `--help` flag for each Python script to learn more about how to run the scripts. i.e. `python code/{script}.py --help`. Also, each Python script has detailed documentation at the beginning of each file.
+This section outlines and talks through the main workflow process of training a TensorFlow Object Detection model using this repository. 
+
+**All scripts should be executed directly under the `tf-object-detection-scripts/` directory.**
+
+Each script can be found in the `code/` directory. Please use the `--help` flag for each Python script to learn more about how to run the scripts. i.e. `python code/{script}.py --help`. Also, each Python script has detailed documentation at the beginning of each file.
 
 > Note: For the remainder of this documentation, the `tf-object-detection-scripts/datasets/{dataset_name}/` path is denoted as `[DS]` for brevity.  
 For example: `tf-object-detection-scripts/datasets/{dataset_name}/media/` directory is written as `[DS]/media/`
@@ -79,6 +84,34 @@ The key output that we require from this step is a directory of `.xml` files whi
 Save exported `.xml` files in `[DS]/frames/labeled/`
 
 ## 3. Create .pbtxt file
+A label `.pbtxt` file is used by Tensorflow to associate ids to its label text.
+
+Each label should be an `item` in the `.pbtxt` file.  And the value of the `name` property should be the label text.
+
+> Note: Ids should start from 1.
+
+Here is an example of a `.pbtxt` file that consists of 4 labels.
+
+```txt
+item {
+ id: 1
+ name: 'person'
+}
+item {
+ id: 2
+ name: 'suitcase'
+}
+item {
+ id: 3
+ name: 'backpack'
+}
+item {
+ id: 4
+ name: 'handbag'
+}
+```
+
+Save this file in `[DS]/data/pascal_label_map.pbtxt`
 
 ## 4. Convert .xml to .record
 TensorFlow requires labeled data to be converted into `.record` files for training. We have provided a script that converts `.xml` files into `.csv`, and ultimately `.record` files.

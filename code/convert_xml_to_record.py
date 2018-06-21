@@ -261,9 +261,22 @@ def remove_csv():
 MAIN FUNCTION
 """
 
+# checks if .csv files exist, returns boolean
+def csv_exists():
+    PATH_TO_EVAL = f'../datasets/{DATASET_NAME}/data/eval_labels.csv'
+    RELATIVE_EVAL_PATH = os.path.abspath(os.path.dirname(__file__) + '/' + PATH_TO_EVAL)
+    eval_exists = os.path.exists(RELATIVE_EVAL_PATH)
+
+    PATH_TO_TRAIN = f'../datasets/{DATASET_NAME}/data/train_labels.csv'
+    RELATIVE_TRAIN_PATH = os.path.abspath(os.path.dirname(__file__) + '/' + PATH_TO_TRAIN)
+    train_exists = os.path.exists(RELATIVE_TRAIN_PATH)
+
+    return (eval_exists) and (train_exists)
+
 def main():
-  convert_xml_to_csv()
-  convert_csv_to_record()
-  remove_csv()
+    if not csv_exists():
+        convert_xml_to_csv()
+    convert_csv_to_record()
+    remove_csv()
   
 main()

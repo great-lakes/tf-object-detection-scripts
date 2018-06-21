@@ -79,15 +79,17 @@ The key output that we require from this step is a directory of `.xml` files whi
 Save exported `.xml` files in `[DS]/frames/labeled/`
 
 ## 3. Convert .xml to .record
-TensorFlow requires labeled data to be converted into `.record` files for training. We have provided a script that converts `.xml` files into `.csv`, and ultimately `.record` files. Breaking this step down (already taken care of by the script):
-
-### Step 1: `xml` -> `csv`
-The `.xml` files containing the frame name, labels and coordinates will be converted into `.csv` files. This is a convenience step for the developer, allowing easy viewing and manipulation, if needed through programs such as Excel. The resulting `.csv` files will be used to create the `.record` files in the next step of this script.
+TensorFlow requires labeled data to be converted into `.record` files for training. We have provided a script that converts `.xml` files into `.csv`, and ultimately `.record` files.
 
 Example running script:
 ```
 python code\convert_xml_to_record.py --dataset_name=example_dataset --pbtxt_file=pascal_label_map.pbtxt
 ```
+Breaking this conversion into two main steps (already taken care of by the script):
+
+### Step 1: `xml` -> `csv`
+The `.xml` files containing the frame name, labels and coordinates will be converted into `.csv` files. This is a convenience step for the developer, allowing easy viewing and manipulation, if needed through programs such as Excel. The resulting `.csv` files will be used to create the `.record` files in the next step of this script.
+
 
 Example output from the first step of the script (using default 80% train/eval split):
 ```

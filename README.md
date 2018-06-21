@@ -52,9 +52,8 @@ Above shows the file format used as well as where the files are used.
 
 ___
 ## Prerequisites
-TODO:
-- software required to run scripts
-- upload and reference installation.md
+You will need tensorflow and python 3.6 to run the scripts in this repo
+- upload and reference [INSTALL.md](INSTALL.md)
 
 ___
 ## Workflow
